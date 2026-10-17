@@ -1,0 +1,37 @@
+{
+	"name": "sailcalc-website",
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"astro": "astro",
+		"build": "astro build",
+		"check": "astro check",
+		"dev": "astro dev",
+		"preview": "astro preview",
+		"start": "astro dev"
+	},
+	"dependencies": {
+		"@astrojs/check": "catalog:",
+		"@astrojs/starlight": "^0.42.6",
+		"@astrojs/svelte": "catalog:",
+		"@tailwindcss/vite": "catalog:",
+		"astro": "^7.2.10",
+		"astro-mermaid": "catalog:",
+		"mermaid": "catalog:",
+		"pretty-bytes": "catalog:",
+		"sharp": "^0.35.3",
+		"svelte": "catalog:",
+		"tailwindcss": "catalog:",
+		"typescript": "^6.0.3"
+	},
+	"devDependencies": {
+		"@fontsource-variable/inter": "catalog:",
+		"@internationalized/date": "catalog:",
+		"bits-ui": "catalog:",
+		"cn": "catalog:",
+		"phosphor-svelte": "catalog:",
+		"shadcn-svelte": "catalog:",
+		"tailwind-variants": "catalog:",
+		"tw-animate-css": "catalog:"
+	}
+}

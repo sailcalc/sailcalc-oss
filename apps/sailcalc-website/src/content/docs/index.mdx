@@ -1,0 +1,38 @@
+---
+title: Welcome to SailCalc
+description: Resources for sailing results and race management.
+template: splash # Remove or comment out this line to display the site sidebar on this page.
+hero:
+  tagline: We are busy creating this website.
+  image:
+    file: '../../assets/sailcalc-logo.svg'
+  # actions:
+  #    - text: Example Guide
+  #      link: /guides/example/
+  #      icon: right-arrow
+  #    - text: Read the Starlight docs
+  #      link: https://starlight.astro.build
+  #      icon: external
+  #      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="Results tables for 2026" icon="pencil">
+		[Display series results](/race-management) in a modern format that is easy
+		to read on any device.
+	</Card>
+	<Card title="Race management resources" icon="notes">
+		[Forms and other resources](/race-management) to help with sailing race
+		management.
+	</Card>
+</CardGrid>
+
+## Coming Soon
+
+<CardGrid stagger>
+	<Card title="SailCalc Results App" icon="pencil">
+		Results software for any device.
+	</Card>
+</CardGrid>

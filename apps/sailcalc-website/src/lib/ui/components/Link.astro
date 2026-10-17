@@ -1,0 +1,70 @@
+---
+// ExternalLink.astro
+//
+// A drop-in replacement for <a> for links that are always external. It:
+//   - opens the link in a new tab
+//   - adds rel="noopener noreferrer" for security
+//   - appends a small icon + screen-reader-only text so users know it opens
+//     in a new tab
+//
+// Usage:
+//   <ExternalLink href="https://example.com">Example</ExternalLink>
+//   <ExternalLink href="https://example.com" showIcon={false}>Example</ExternalLink>
+
+import { Icon } from '@astrojs/starlight/components';
+import ArrowSquareOutIcon from 'phosphor-svelte/lib/ArrowSquareOutIcon';
+import FileArrowDownIcon from 'phosphor-svelte/lib/FileArrowDownIcon';
+import LinkIcon from 'phosphor-svelte/lib/LinkIcon';
+
+export interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
+	/** The link destination. */
+	href: string;
+	/** Show the small external-link icon after the link text. Default: true. */
+	showIcon?: boolean;
+	/** CSS class(es) applied to the anchor. */
+	class?: string;
+	download?: boolean;
+}
+
+const { href, showIcon, class: className, download, ...rest } = Astro.props;
+
+const external = !download && href.startsWith('http');
+const normal = !download && !external;
+---
+
+{external && (
+	<a
+		href={href}
+		class={className}
+		target="_blank"
+		rel="noopener noreferrer"
+		{...rest}
+	>
+		<slot />
+		{showIcon !== false && (
+			<ArrowSquareOutIcon class="icon" weight="light" size="16" />
+		)}
+	</a>
+)}
+{download && (
+	<a href={href} class={className} download {...rest}>
+		<slot />
+		{showIcon !== false && (
+			<FileArrowDownIcon class="icon" weight="thin" size="18" />
+		)}
+	</a>
+)}
+{normal && (
+	<a href={href} class={className} {...rest}>
+		<slot />
+		{showIcon === true && <LinkIcon class="icon" weight="light" size="16" />}
+	</a>
+)}
+
+<style>
+	.icon {
+		display: inline-block;
+		margin-inline-start: 0.125em;
+		vertical-align: middle;
+	}
+</style>

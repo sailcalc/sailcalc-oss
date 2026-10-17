@@ -1,0 +1,219 @@
+.scsr__container {
+	font-size: 1rem;
+	overflow: auto;
+}
+
+.scsr__row-grid {
+	display: grid;
+	gap: 0;
+	align-items: stretch;
+	justify-content: center;
+	grid-template-columns: var(--result-cell-width) /* rank */
+		minmax(20em, var(--titles-width)) /* titles */
+		minmax(
+			calc(var(--result-cell-width) * var(--min-races)),
+			calc(var(--result-cell-width) * var(--n-races))
+		)
+		/* races */
+		calc(var(--result-cell-width) * 2); /* total/net */
+
+	grid-template-rows: auto;
+	/* Include the border within the cell width so we know how wide they are. */
+	box-sizing: border-box;
+	border: solid #777;
+	border-width: 1px 1px 1px 0;
+	border-width: 0;
+
+	break-inside: avoid-page;
+	/* grid-template-columns: repeat(auto-fit, minmax(2.75em, 1fr)); */
+	max-width: 100vw;
+}
+
+a.scsr__row-grid {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+a.scsr__row-grid:hover > *,
+a.scsr__row-grid:focus > * {
+	background-color: #eee;
+}
+
+.striped .even > * {
+	background-color: var(--highlight-even);
+}
+
+.striped .odd > * {
+	background-color: var(--highlight-odd);
+}
+
+.striped .scsr__row-grid .hover {
+	background-color: #f3f3f3;
+}
+
+.scsr__rank-section,
+.scsr__total-section,
+.scsr__titles-section,
+.scsr__races-section {
+	/** Do NOT include the border in the width so we can fit n cells in. */
+	width: 100%;
+	box-sizing: content-box;
+	border: solid #777;
+	border-width: 1px 0 0 2px;
+	margin-top: -1px;
+}
+
+.scsr__rank-section,
+.total-net {
+	font-weight: bold;
+}
+
+.scsr__total-section {
+	border-width: 1px 1px 0 2px;
+}
+
+.scsr__rank-section.scsr--titles,
+.scsr__total-section.scsr--titles,
+.scsr__titles-section.scsr--titles,
+.scsr__races-section.scsr--titles {
+	background: #fff;
+	border-width: 1px 0 0 2px;
+	margin-top: 0;
+	margin-bottom: 1px;
+	font-weight: bold;
+}
+
+.scsr__total-section.scsr--titles {
+	border-width: 1px 1px 0 2px;
+}
+
+.scsr__rank-section {
+	display: grid;
+	gap: 0;
+	grid-template-columns: var(--result-cell-width);
+}
+
+.scsr__titles-section {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.scsr__titles-section > .title {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	min-height: 1.5em;
+	border: solid #ccc;
+	border-width: 0 1px 1px 0;
+	/** Include the border in the width so we can fit n cells in. */
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+
+.scsr__titles-section > .title > div {
+	padding: 0 0 0 0.375em; /* This must match `nonCenteredTitlePaddingEm`. */
+	text-align: left;
+}
+
+.scsr__titles-section > .title.align-r > div {
+	margin-left: auto;
+	padding: 0 0.375em 0 0; /* This must match `nonCenteredTitlePaddingEm`. */
+	text-align: right;
+}
+
+.scsr__titles-section > .title.align-c > div {
+	margin: auto;
+	padding: 0;
+	text-align: center;
+}
+
+.scsr__races-section {
+	display: grid;
+	gap: 0;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(var(--result-cell-width), 1fr)
+	);
+}
+
+.scsr__total-section {
+	display: grid;
+	gap: 0;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(var(--result-cell-width), 1fr)
+	);
+}
+
+.scsr__menu-section {
+	grid-column: 1 / 5;
+	width: 100%;
+}
+
+.scsr__cell,
+.sc-result-cell__code,
+.sc-result-cell__score,
+.sc-result-cell__code-only,
+.sc-result-cell__score-only {
+	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	border: solid #ccc;
+	border-width: 0 1px 1px 0;
+	width: 100%;
+	/** Include the border in the width so we can fit n cells in. */
+	box-sizing: border-box;
+}
+
+.scsr__races-section.scsr--titles .scsr__cell {
+	font-size: 87.5%;
+}
+
+/** Smaller than a tablet (768px). */
+@media screen and (width < 48em) {
+	.scsr__row-grid {
+		grid-auto-flow: dense;
+		grid-template-columns: var(--result-cell-width) /* rank */
+			1fr /* titles/races */
+			var(--result-cell-width); /* total/net */
+		grid-template-rows: auto;
+	}
+	.scsr__rank-section {
+		grid-row: span 2;
+	}
+	.scsr__races-section {
+		grid-column: 2 / 3;
+	}
+	.scsr__total-section {
+		grid-row: span 2;
+	}
+	.scsr__menu-section {
+		grid-column: 1 / 4;
+	}
+}
+
+/** Print settings. */
+@media print {
+	/** Use a sensible font size. */
+	.scsr__row-grid {
+		font-size: 12px;
+	}
+}
+
+.sc-result-cell__code {
+	font-size: 0.625em;
+	width: 100%;
+}
+.sc-result-cell__score {
+	line-height: 1;
+	padding-bottom: 0.125em;
+}
+.sc-result-cell__code-only {
+	padding: 1px 0 2px;
+	font-size: 0.875em;
+}
+.sc-result-cell__score-only {
+	padding: 1px 0 2px;
+}

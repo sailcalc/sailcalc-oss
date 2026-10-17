@@ -1,0 +1,29 @@
+---
+title: Shadcn on this site
+draft: true
+---
+
+This was not as easy as it should have been.
+
+[Demo](./shadcn-demo)
+
+## Modifications
+
+### Spinner
+
+- `IconLoader` replaced with `IconLoader2` as it is nicer.
+- added `spin` property (default `true`) to stop spinning.
+
+```ts
+let {
+	…
+	spin = true,
+}: SVGAttributes<SVGSVGElement> & {spin?: boolean} = $props();
+</script>
+
+<IconLoader2
+	…
+	class={cn('size-4', spin && 'animate-spin', className)}
+	…
+/>
+```
